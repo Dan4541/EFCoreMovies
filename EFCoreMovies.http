@@ -1,0 +1,6 @@
+@EFCoreMovies_HostAddress = http://localhost:5001
+
+GET {{EFCoreMovies_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
