@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace EFCoreMovies.Entities
 {
+    //[Index(nameof(Name), IsUnique = true)]
     public class Genre
     {
         //Restricciones a traves de atributos

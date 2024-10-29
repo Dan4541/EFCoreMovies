@@ -12,6 +12,11 @@ namespace EFCoreMovies.Entities.Configurations
                .IsRequired();
 
             builder.HasQueryFilter(g => !g.IsDeleted);
+
+            builder.HasIndex(g => g.Name).IsUnique().HasFilter("IsDeleted = 'false'");
+
+            //Propieda sombra
+            builder.Property<DateTime>("CreatedDate").HasDefaultValueSql("GetDate()").HasColumnType("datetime2");
         }
     }
 }

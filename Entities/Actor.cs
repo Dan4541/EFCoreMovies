@@ -21,5 +21,29 @@ namespace EFCoreMovies.Entities
         //[Column(TypeName = "Date")]
         public DateTime? DateOfBirth { get; set; }
         public List<MovieActor> MoviesActors { get; set; }
+
+        public string PhotoURL { get; set; }
+
+        //Como la edad se calcula no es necesario que se guarde el dato en la bd, notmapped ignora a edad y no lo guarda
+        [NotMapped]
+        public int? Age
+        {
+            get
+            {
+                if (!DateOfBirth.HasValue)
+                {
+                    return null;
+                }
+
+                var dateOfBirth = DateOfBirth.Value;
+                var age = DateTime.Today.Year - dateOfBirth.Year;
+
+                if(new DateTime(DateTime.Today.Year, dateOfBirth.Month, dateOfBirth.Day) > DateTime.Today)
+                {
+                    age--;
+                }
+                return age;
+            }
+        }
     }
 }

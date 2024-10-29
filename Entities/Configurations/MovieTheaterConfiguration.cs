@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoreMovies.Entities.Configurations.Conversions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 
@@ -12,7 +13,11 @@ namespace EFCoreMovies.Entities.Configurations
                 .HasPrecision(precision: 9, scale: 2);
 
             builder.Property(prop => prop.TheaterType)
-                .HasDefaultValue(MovieTheaterType.TwoDimensions);
+                .HasDefaultValue(MovieTheaterType.TwoDimensions)
+                .HasConversion<string>();
+
+            builder.Property(prop => prop.Currency)
+                .HasConversion<CurrencyToSymbolConverter>();
         }
     }
 }

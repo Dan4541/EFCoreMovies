@@ -3,6 +3,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EFCoreMovies.DTOs;
 using EFCoreMovies.Entities;
+using EFCoreMovies.Entities.Keyless;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite;
@@ -26,6 +27,13 @@ namespace EFCoreMovies.Controllers
         public async Task<IEnumerable<CinemaDTO>> GetAll()
         {
             return await _context.Cines.ProjectTo<CinemaDTO>(_mapper.ConfigurationProvider).ToListAsync();
+        }
+
+        [HttpGet("withnoubication")]
+        public async Task<IEnumerable<CinemaWithNoUbication>> GetWithNoUbication()
+        {
+            //return await _context.Set<CinemaWithNoUbication>().ToListAsync();
+            return await _context.cinemaWithNoUbications.ToListAsync();
         }
 
         [HttpGet("nearest")]
@@ -52,7 +60,7 @@ namespace EFCoreMovies.Controllers
 
             var cinema = new Cinema()
             {
-                Name = "Paseo Metropoli",
+                Name = "Anubis",
                 Ubication = myUbication,
                 CinemaOffer = new CinemaOffer()
                 {
@@ -65,18 +73,21 @@ namespace EFCoreMovies.Controllers
                     new MovieTheater()
                     {
                         Price = 250,
-                        TheaterType = MovieTheaterType.TwoDimensions
+                        TheaterType = MovieTheaterType.TwoDimensions,
+                        Currency = Currency.ColonCR
                     },
                     new MovieTheater()
                     {
                         Price = 380,
-                        TheaterType = MovieTheaterType.ThreeDimensions
+                        TheaterType = MovieTheaterType.ThreeDimensions,
+                        Currency = Currency.USDollar
                     },
 
                     new MovieTheater()
                     {
                         Price = 300,
-                        TheaterType = MovieTheaterType.CxC
+                        TheaterType = MovieTheaterType.CxC,
+                        Currency = Currency.Euro
                     }
                 }
             };

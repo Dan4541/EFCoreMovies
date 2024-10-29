@@ -8,5 +8,6 @@
         public int CinemaId { get; set; }
         public Cinema Cinema { get; set; }
         public List<Movie> Movies { get; set; }
+        public Currency Currency { get; set; }
     }
 }

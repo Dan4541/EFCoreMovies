@@ -18,6 +18,8 @@ namespace EFCoreMovies.Controllers
         [HttpGet]
         public async Task<IEnumerable<Genre>> GetAll()
         {
+            _context.Logs.Add(new Log() { Message = "Get all genres list"});
+            await _context.SaveChangesAsync();
             return await _context.Genres.ToListAsync();
         }
 
@@ -62,7 +64,7 @@ namespace EFCoreMovies.Controllers
             var genres = await _context.Genres.Take(2).ToListAsync();
             return genres;
         }
-
+        /*
         [HttpPost]
         public async Task<ActionResult> RegisterGenre(Genre genre)
         {
@@ -71,6 +73,23 @@ namespace EFCoreMovies.Controllers
             var status2 = _context.Entry(genre).State;
             await _context.SaveChangesAsync();
             var status3 = _context.Entry(genre).State;
+
+            return Ok();
+        }
+        */
+
+        [HttpPost]
+        public async Task<ActionResult> RegisterGenreIndexEfficient(Genre genre)
+        {
+            var genreExistsName = await _context.Genres.AnyAsync(g => g.Name == genre.Name);
+
+            if (genreExistsName)
+            {
+                return BadRequest("The Genre you're trying to add already exists " + genre.Name);
+            }
+
+            _context.Add(genre);
+            await _context.SaveChangesAsync();
 
             return Ok();
         }

@@ -1,5 +1,7 @@
 ﻿using EFCoreMovies.Entities;
+using EFCoreMovies.Entities.Keyless;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Reflection;
 
 namespace EFCoreMovies
@@ -21,6 +23,22 @@ namespace EFCoreMovies
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //SeedingQueryModule.Seed(modelBuilder);
+
+            modelBuilder.Entity<CinemaWithNoUbication>()
+                .HasNoKey()
+                .ToSqlQuery("Select Id, Name FROM Cines").ToView(null);
+
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var propiedad in entityType.GetProperties())
+                {
+                    if (propiedad.ClrType == typeof(string) && propiedad.Name.Contains("URL", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        propiedad.SetIsUnicode(false);
+                    }
+                }
+
+            }
         }
 
         
@@ -30,7 +48,9 @@ namespace EFCoreMovies
         public DbSet<Movie> Movies { get; set; }
         public DbSet<CinemaOffer> CinemaOffers { get; set; }
         public DbSet<MovieTheater> MovieTheaters { get; set; }
-        public DbSet<MovieActor> MoviesActors { get; set; }        
+        public DbSet<MovieActor> MoviesActors { get; set; }       
+        public DbSet<Log> Logs { get; set; }
+        public DbSet<CinemaWithNoUbication> cinemaWithNoUbications { get; set; }
         
     }
 }
