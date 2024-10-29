@@ -8,7 +8,7 @@ namespace EFCoreMovies.Entities.Configurations
     {
         public void Configure(EntityTypeBuilder<CinemaOffer> builder)
         {
-            builder.Property(prop => prop.discountPersentage)
+            builder.Property(prop => prop.discountPercentage)
                 .HasPrecision(precision: 5, scale: 2);
         }
     }

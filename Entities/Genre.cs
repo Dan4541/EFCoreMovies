@@ -12,7 +12,8 @@ namespace EFCoreMovies.Entities
         //[MaxLength(50)]
         //[Required]
         public string Name { get; set; }
-        public HashSet<Movie> Movies { get; set; }
+        public List<Movie> Movies { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

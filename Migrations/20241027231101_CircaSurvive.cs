@@ -7,7 +7,7 @@ using NetTopologySuite.Geometries;
 namespace EFCoreMovies.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class CircaSurvive : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,7 +47,7 @@ namespace EFCoreMovies.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,7 +144,7 @@ namespace EFCoreMovies.Migrations
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     ActorId = table.Column<int>(type: "int", nullable: false),
                     Character = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
-                    Order = table.Column<int>(type: "int", nullable: false)
+                    OrderMA = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

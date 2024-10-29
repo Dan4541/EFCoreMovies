@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace EFCoreMovies.Entities.Configurations
 {
@@ -9,8 +8,10 @@ namespace EFCoreMovies.Entities.Configurations
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
             builder.Property(prop => prop.Name)
-               .HasMaxLength(10)
+               .HasMaxLength(50)
                .IsRequired();
+
+            builder.HasQueryFilter(g => !g.IsDeleted);
         }
     }
 }

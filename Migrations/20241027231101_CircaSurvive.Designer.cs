@@ -13,8 +13,8 @@ using NetTopologySuite.Geometries;
 namespace EFCoreMovies.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024020552_Inicial")]
-    partial class Inicial
+    [Migration("20241027231101_CircaSurvive")]
+    partial class CircaSurvive
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,8 +110,8 @@ namespace EFCoreMovies.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -159,7 +159,7 @@ namespace EFCoreMovies.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("Order")
+                    b.Property<int>("OrderMA")
                         .HasColumnType("int");
 
                     b.HasKey("MovieId", "ActorId");

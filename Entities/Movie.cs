@@ -7,8 +7,8 @@
         public bool OnBillboard { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string PosterURL { get; set; }
-        public HashSet<Genre> Genres { get; set; }
-        public HashSet<MovieTheater> MovieTheaters { get; set; }
-        public HashSet<MovieActor> MoviesActors { get; set; }
+        public List<Genre> Genres { get; set; }
+        public List<MovieTheater> MovieTheaters { get; set; }
+        public List<MovieActor> MoviesActors { get; set; }
     }
 }

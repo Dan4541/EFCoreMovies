@@ -10,6 +10,9 @@ namespace EFCoreMovies.Entities.Configurations
             builder.Property(prop => prop.Name)
             .HasMaxLength(70)
             .IsRequired();
+
+            //Mapeo flexible
+            builder.Property(prop => prop.Name).HasField("_Name");
         }
     }
 }
